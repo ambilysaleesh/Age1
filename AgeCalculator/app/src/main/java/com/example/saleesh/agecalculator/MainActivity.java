@@ -2,15 +2,19 @@ package com.example.saleesh.agecalculator;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -18,6 +22,20 @@ public class MainActivity extends ActionBarActivity {
     Spinner spinday ;
     Spinner spinmonth;
     Spinner spinyear;
+    Button btn_submit;
+    TextView text_day;
+    TextView text_result;
+
+    int res_Year = 100;
+    int res_Month = 101;
+    int res_days = 102;
+
+    final Calendar c = Calendar.getInstance();
+    int current_year = c.get(Calendar.YEAR);
+    int current_month = c.get(Calendar.MONTH);
+    int current_day = c.get(Calendar.DAY_OF_MONTH);
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +43,13 @@ public class MainActivity extends ActionBarActivity {
         spinday = (Spinner)findViewById(R.id.spinnerdate);
         spinmonth = (Spinner)findViewById(R.id.spinnermonth);
         spinyear = (Spinner)findViewById(R.id.spinneryear);
+        btn_submit = (Button)findViewById(R.id.button);
+        text_result = (TextView)findViewById(R.id.textResult);
+
+
+        text_day = (TextView)findViewById(R.id.textCurrent_day);
+        text_day.setText("Today is :" + new StringBuilder().append(current_day).append(" ").append("-").append(current_month + 1).append("-")
+                .append(current_year));
 
         ArrayAdapter<CharSequence> adapter_day = ArrayAdapter.createFromResource(this, R.array.date, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> adapter_month = ArrayAdapter.createFromResource(this, R.array.month, android.R.layout.simple_spinner_item);
@@ -79,8 +104,38 @@ public class MainActivity extends ActionBarActivity {
         });
 
 
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Log.e("exp", "My button--------------------------------------------------------------------------------------");
+
+                //1. Get current Year, month, day here
+
+                calculateAge();
+                text_result.setText(Integer.toString(res_Year) + " " + Integer.toString(res_Month));
+                //text_result.setText(str_abc);
+
+
+            }
+        });
+
+
     }
 
+
+
+    public void calculateAge() {
+
+        res_Year = 2009;
+        res_Month = 8;
+        res_days  = 20;
+
+
+
+
+
+
+    }
 
 
 
