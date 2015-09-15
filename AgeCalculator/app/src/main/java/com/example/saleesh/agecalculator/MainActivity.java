@@ -62,10 +62,11 @@ public class MainActivity extends ActionBarActivity {
         text_day   =  (TextView)findViewById(R.id.textView_day);
 
 
-
+        //current_month starts from 0
+        current_month = current_month + 1;
 
         text_today = (TextView)findViewById(R.id.textCurrent_day);
-        text_today.setText("Today is :" + new StringBuilder().append(current_day).append(" ").append("-").append(current_month + 1).append("-")
+        text_today.setText("Today is :" + new StringBuilder().append(current_day).append(" ").append("-").append(current_month).append("-")
                 .append(current_year));
 
         ArrayAdapter<CharSequence> adapter_day = ArrayAdapter.createFromResource(this, R.array.date, android.R.layout.simple_spinner_item);
@@ -85,14 +86,16 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                // Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " day selected ", Toast.LENGTH_LONG).show();
-                String start_day = parent.getItemAtPosition(position).toString();
-                //text_result.setText(start_day);
+                String str_start_day = parent.getItemAtPosition(position).toString();
+                //text_result.setText(str_start_day );
+
+                start_day = Integer.parseInt(str_start_day);
 
 
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
-
+                start_day = 5;
             }
         });
 
@@ -101,9 +104,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " month selected ", Toast.LENGTH_LONG).show();
-                String start_month = parent.getItemAtPosition(position).toString();
-                //text_result.setText(start_month);
+                String str_start_month = parent.getItemAtPosition(position).toString();
+                //text_result.setText(str_start_month );
 
+                start_month = Integer.parseInt(str_start_month);
             }
 
             @Override
@@ -116,10 +120,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                // Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " year selected ", Toast.LENGTH_LONG).show();
-                String start_year = parent.getItemAtPosition(position).toString();
-                //int yy = Integer.parseInt(start_year);
+                String str_start_year = parent.getItemAtPosition(position).toString();
+                //text_result.setText(str_start_year);
+                start_year = Integer.parseInt(str_start_year );
 
-                //text_result.setText(start_year);
 
 
             }
@@ -163,14 +167,21 @@ public class MainActivity extends ActionBarActivity {
        //text_year.setText(start_year);
 
 
-        current_day = 15;
-        current_month = 9;
-        current_year = 2015;
+        //current_day = 15;
+        //current_month = 9;
+        //current_year = 2015;
 
 
-        start_day = 7;
-        start_month = 9;
-        start_year = 1982;
+        //Log.e("hi", Integer.toString(current_day));
+        //Log.e("hi", Integer.toString(current_month ));
+        //Log.e("hi", Integer.toString(current_year ));
+        Log.e("Day", Integer.toString(start_day));
+        Log.e("Month", Integer.toString(start_month));
+        Log.e("Year", Integer.toString(start_year));
+
+        //start_day = 7;
+        //start_month = 9;
+        //start_year = 1982;
 
         res_year  = current_year - start_year;
         //res_month = 0;
