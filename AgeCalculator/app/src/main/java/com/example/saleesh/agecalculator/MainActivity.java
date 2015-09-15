@@ -23,17 +23,29 @@ public class MainActivity extends ActionBarActivity {
     Spinner spinmonth;
     Spinner spinyear;
     Button btn_submit;
-    TextView text_day;
+    TextView text_today;
     TextView text_result;
+    TextView text_year;
+    TextView text_month;
+    TextView text_day;
 
-    int res_Year = 100;
-    int res_Month = 101;
-    int res_days = 102;
+    int res_year ;
+    int res_month;
+    int res_day;
 
     final Calendar c = Calendar.getInstance();
     int current_year = c.get(Calendar.YEAR);
     int current_month = c.get(Calendar.MONTH);
     int current_day = c.get(Calendar.DAY_OF_MONTH);
+
+    int start_day;
+    int start_month;
+    int start_year;
+
+    int yy;
+    int prev_month;
+    int prev_days;
+    int month;
 
 
 
@@ -45,10 +57,15 @@ public class MainActivity extends ActionBarActivity {
         spinyear = (Spinner)findViewById(R.id.spinneryear);
         btn_submit = (Button)findViewById(R.id.button);
         text_result = (TextView)findViewById(R.id.textResult);
+        text_year   =  (TextView)findViewById(R.id.textView_year);
+        text_month   =  (TextView)findViewById(R.id.textView_month);
+        text_day   =  (TextView)findViewById(R.id.textView_day);
 
 
-        text_day = (TextView)findViewById(R.id.textCurrent_day);
-        text_day.setText("Today is :" + new StringBuilder().append(current_day).append(" ").append("-").append(current_month + 1).append("-")
+
+
+        text_today = (TextView)findViewById(R.id.textCurrent_day);
+        text_today.setText("Today is :" + new StringBuilder().append(current_day).append(" ").append("-").append(current_month + 1).append("-")
                 .append(current_year));
 
         ArrayAdapter<CharSequence> adapter_day = ArrayAdapter.createFromResource(this, R.array.date, android.R.layout.simple_spinner_item);
@@ -67,7 +84,10 @@ public class MainActivity extends ActionBarActivity {
         spinday.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " day selected ", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " day selected ", Toast.LENGTH_LONG).show();
+                String start_day = parent.getItemAtPosition(position).toString();
+                //text_result.setText(start_day);
+
 
             }
 
@@ -80,7 +100,9 @@ public class MainActivity extends ActionBarActivity {
         spinmonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " month selected ", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " month selected ", Toast.LENGTH_LONG).show();
+                String start_month = parent.getItemAtPosition(position).toString();
+                //text_result.setText(start_month);
 
             }
 
@@ -93,7 +115,12 @@ public class MainActivity extends ActionBarActivity {
         spinyear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " year selected ", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " year selected ", Toast.LENGTH_LONG).show();
+                String start_year = parent.getItemAtPosition(position).toString();
+                //int yy = Integer.parseInt(start_year);
+
+                //text_result.setText(start_year);
+
 
             }
 
@@ -112,8 +139,13 @@ public class MainActivity extends ActionBarActivity {
                 //1. Get current Year, month, day here
 
                 calculateAge();
-                text_result.setText(Integer.toString(res_Year) + " " + Integer.toString(res_Month));
-                //text_result.setText(str_abc);
+               // text_result.setText(Integer.toString(res_Year) + " " + Integer.toString(res_Month));
+                //text_result.setText(Integer.toString(start_year));
+                //res_year = 100;
+
+
+
+
 
 
             }
@@ -126,14 +158,70 @@ public class MainActivity extends ActionBarActivity {
 
     public void calculateAge() {
 
-        res_Year = 2009;
-        res_Month = 8;
-        res_days  = 20;
+        //res_Year = (current_year - start_year);
+        //text_year.append(start_year);
+       //text_year.setText(start_year);
+
+
+        current_day = 15;
+        current_month = 9;
+        current_year = 2015;
+
+
+        start_day = 7;
+        start_month = 9;
+        start_year = 1982;
+
+        res_year  = current_year - start_year;
+        //res_month = 0;
+        //res_day = 0;
+
+        if(current_month >= start_month) {
+            res_month = current_month - start_month;
+        }
+        else{
+
+        res_month = current_month - start_month;
+        res_month = res_month + 12;
+        res_year = res_year - 1;
+        }
+        if(current_day < start_day) {
+            res_month = res_month - 1;
+        }
+
+
+
+        if(current_day >= start_day) {
+            res_day = current_day - start_day;
+        }
+        else {
+            prev_month = current_month - 1;
+
+          if(prev_month == 0){
+             prev_month = 12;
+          }
+             prev_days = get_days(prev_month);
+             res_day = current_day + prev_days - start_day;
+
+        }
+        Log.e("hi","88888888888888888888888888888888888888888888888888888888888888888888888");
+        //res_year = 100;
+        text_result.setText("Years: " + Integer.toString(res_year) + " Months: " + Integer.toString(res_month) + " Days: " + Integer.toString(res_day));
+    }
 
 
 
 
+    public int get_days(int month){
+        int days = 30;
 
+        if(month == 2)
+        days = 28;
+        else if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12)
+        days = 31;
+        else
+        days = 30;
+        return (days);
 
     }
 
