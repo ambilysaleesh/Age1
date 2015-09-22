@@ -31,13 +31,7 @@ public class MainActivity extends ActionBarActivity  {
     TextView text_today;
     TextView text_result;
     TextView popupmessage;
-    //TextView text_year;
-   // TextView text_month;
-    //TextView text_day;
 
-    LinearLayout layoutOfPopup;
-    PopupWindow popupMessage;
-    TextView popupText;
 
     int res_year ;
     int res_month;
@@ -67,10 +61,6 @@ public class MainActivity extends ActionBarActivity  {
         spinyear = (Spinner)findViewById(R.id.spinneryear);
         btn_submit = (Button)findViewById(R.id.button);
         text_result = (TextView)findViewById(R.id.textResult);
-        //ok_button = (Button)findViewById(R.id.button_ok);
-        //text_year   =  (TextView)findViewById(R.id.textView_year);
-        //text_month   =  (TextView)findViewById(R.id.textView_month);
-        //text_day   =  (TextView)findViewById(R.id.textView_day);
 
 
         //current_month starts from 0
@@ -98,11 +88,7 @@ public class MainActivity extends ActionBarActivity  {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                // Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " day selected ", Toast.LENGTH_LONG).show();
                 String str_start_day = parent.getItemAtPosition(position).toString();
-                //text_result.setText(str_start_day );
-
                 start_day = Integer.parseInt(str_start_day);
-
-
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -116,8 +102,6 @@ public class MainActivity extends ActionBarActivity  {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " month selected ", Toast.LENGTH_LONG).show();
                 String str_start_month = parent.getItemAtPosition(position).toString();
-                //text_result.setText(str_start_month );
-
                 start_month = Integer.parseInt(str_start_month);
             }
 
@@ -132,11 +116,8 @@ public class MainActivity extends ActionBarActivity  {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                // Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " year selected ", Toast.LENGTH_LONG).show();
                 String str_start_year = parent.getItemAtPosition(position).toString();
-                //text_result.setText(str_start_year);
+
                 start_year = Integer.parseInt(str_start_year );
-
-
-
             }
 
             @Override
@@ -146,19 +127,18 @@ public class MainActivity extends ActionBarActivity  {
         });
 
 
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Log.e("exp", "My button--------------------------------------------------------------------------------------");
 
                 //1. Get current Year, month, day here
-
-                if( start_year > 0){
+                if(isValidInput() == false){
                     Log.e("Popup", "I m popup");
                     startPopUpWindow();
                     return;
                 }
-
 
                 calculateAge();
             }
@@ -171,56 +151,32 @@ public class MainActivity extends ActionBarActivity  {
         startActivity(new Intent(MainActivity.this,Pop.class));
     }
 
+    /* checks if date of birth seleted is Valid or not */
+    public  boolean isValidInput(){
+        boolean isValid = true;
 
+        if(start_year > current_year) {
+            isValid = false;
+        }
+        else if(start_year == current_year){
+            if(start_month > current_month) isValid = false;
 
+            if(start_month == current_month){
+                if(start_day > current_day) isValid = false;
+            }
+        }
 
-
-
-
-
-
-
-
-
-    //private void showToastErrorMessage(){
-    //show toast
-       // Toast.makeText(getBaseContext(), "heeya", Toast.LENGTH_LONG).show();
-    //}
-
-
+        return isValid;
+    }
 
 
     public void calculateAge() {
-
-        //res_Year = (current_year - start_year);
-        //text_year.append(start_year);
-       //text_year.setText(start_year);
-
-
-        //current_day = 15;
-        //current_month = 9;
-        //current_year = 2015;
-
-
-        //Log.e("hi", Integer.toString(current_day));
-        //Log.e("hi", Integer.toString(current_month ));
-        //Log.e("hi", Integer.toString(current_year ));
         Log.e("Day", Integer.toString(start_day));
         Log.e("Month", Integer.toString(start_month));
         Log.e("Year", Integer.toString(start_year));
 
-        //start_day = 7;
-        //start_month = 9;
-        //start_year = 1982;
-
-        //if( start_year > current_year ){
-
-
-
 
         res_year  = current_year - start_year;
-        //res_month = 0;
-        //res_day = 0;
 
         if(current_month >= start_month) {
             res_month = current_month - start_month;
@@ -251,7 +207,6 @@ public class MainActivity extends ActionBarActivity  {
 
         }
         Log.e("hi","88888888888888888888888888888888888888888888888888888888888888888888888");
-        //res_year = 100;
         text_result.setText("Years: " + Integer.toString(res_year) + " Months: " + Integer.toString(res_month) + " Days: " + Integer.toString(res_day));
     }
 
@@ -270,8 +225,6 @@ public class MainActivity extends ActionBarActivity  {
         return (days);
 
     }
-
-
 
 
 
@@ -297,11 +250,6 @@ public class MainActivity extends ActionBarActivity  {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
 
 
 
