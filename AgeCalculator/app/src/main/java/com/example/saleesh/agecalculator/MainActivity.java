@@ -1,5 +1,6 @@
 package com.example.saleesh.agecalculator;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,15 +10,19 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewGroup.LayoutParams;
+import android.view.View.OnClickListener;
 
 import java.util.Calendar;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity  {
 
     Spinner spinday ;
     Spinner spinmonth;
@@ -25,9 +30,14 @@ public class MainActivity extends ActionBarActivity {
     Button btn_submit;
     TextView text_today;
     TextView text_result;
-    TextView text_year;
-    TextView text_month;
-    TextView text_day;
+    TextView popupmessage;
+    //TextView text_year;
+   // TextView text_month;
+    //TextView text_day;
+
+    LinearLayout layoutOfPopup;
+    PopupWindow popupMessage;
+    TextView popupText;
 
     int res_year ;
     int res_month;
@@ -57,9 +67,10 @@ public class MainActivity extends ActionBarActivity {
         spinyear = (Spinner)findViewById(R.id.spinneryear);
         btn_submit = (Button)findViewById(R.id.button);
         text_result = (TextView)findViewById(R.id.textResult);
-        text_year   =  (TextView)findViewById(R.id.textView_year);
-        text_month   =  (TextView)findViewById(R.id.textView_month);
-        text_day   =  (TextView)findViewById(R.id.textView_day);
+        //ok_button = (Button)findViewById(R.id.button_ok);
+        //text_year   =  (TextView)findViewById(R.id.textView_year);
+        //text_month   =  (TextView)findViewById(R.id.textView_month);
+        //text_day   =  (TextView)findViewById(R.id.textView_day);
 
 
         //current_month starts from 0
@@ -142,21 +153,40 @@ public class MainActivity extends ActionBarActivity {
 
                 //1. Get current Year, month, day here
 
+                if( start_year > 0){
+                    Log.e("Popup", "I m popup");
+                    startPopUpWindow();
+                    return;
+                }
+
+
                 calculateAge();
-               // text_result.setText(Integer.toString(res_Year) + " " + Integer.toString(res_Month));
-                //text_result.setText(Integer.toString(start_year));
-                //res_year = 100;
-
-
-
-
-
-
             }
         });
 
 
     }
+
+    public void startPopUpWindow(){
+        startActivity(new Intent(MainActivity.this,Pop.class));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //private void showToastErrorMessage(){
+    //show toast
+       // Toast.makeText(getBaseContext(), "heeya", Toast.LENGTH_LONG).show();
+    //}
+
 
 
 
@@ -182,6 +212,11 @@ public class MainActivity extends ActionBarActivity {
         //start_day = 7;
         //start_month = 9;
         //start_year = 1982;
+
+        //if( start_year > current_year ){
+
+
+
 
         res_year  = current_year - start_year;
         //res_month = 0;
@@ -262,4 +297,12 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
+
+
 }

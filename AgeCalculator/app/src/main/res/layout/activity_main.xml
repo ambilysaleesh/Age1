@@ -78,35 +78,6 @@
         android:id="@+id/textResult"
         android:layout_weight="0.12" />
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TableRow>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total No of years::"
-        android:id="@+id/textView_year" />
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TableRow>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" No of months::"
-        android:id="@+id/textView_month" />
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TableRow>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" No of days::"
-        android:id="@+id/textView_day" />
 
 
 </LinearLayout>
