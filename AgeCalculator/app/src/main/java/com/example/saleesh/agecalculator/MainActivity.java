@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity  {
     Button btn_submit;
     TextView text_today;
     TextView text_result;
-    TextView popupmessage;
+    TextView text_next;
 
 
     int res_year ;
@@ -61,6 +61,7 @@ public class MainActivity extends ActionBarActivity  {
         spinyear = (Spinner)findViewById(R.id.spinneryear);
         btn_submit = (Button)findViewById(R.id.button);
         text_result = (TextView)findViewById(R.id.textResult);
+        text_next = (TextView)findViewById(R.id.textView_next);
 
 
         //current_month starts from 0
@@ -206,8 +207,10 @@ public class MainActivity extends ActionBarActivity  {
              res_day = current_day + prev_days - start_day;
 
         }
-        Log.e("hi","88888888888888888888888888888888888888888888888888888888888888888888888");
-        text_result.setText("Years: " + Integer.toString(res_year) + " Months: " + Integer.toString(res_month) + " Days: " + Integer.toString(res_day));
+        Log.e("hi", "88888888888888888888888888888888888888888888888888888888888888888888888");
+       // text_result.append("Years: " + Integer.toString(res_year) + " Months: " + Integer.toString(res_month) + " Days: " + Integer.toString(res_day));
+        text_result.append( Integer.toString(res_year) +" years "+Integer.toString(res_month)+" months " +Integer.toString(res_day)+" days old .."  );
+        text_next.append(Integer.toString(start_day )+ "/" + Integer.toString(start_month ) + "/" + Integer.toString(current_year + 1 ));
     }
 
 
