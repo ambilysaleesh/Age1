@@ -1,6 +1,7 @@
 package com.example.saleesh.agecalculator;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,8 +69,9 @@ public class MainActivity extends ActionBarActivity  {
         current_month = current_month + 1;
 
         text_today = (TextView)findViewById(R.id.textCurrent_day);
-        text_today.setText("Today is :" + new StringBuilder().append(current_day).append(" ").append("-").append(current_month).append("-")
+        text_today.setText("Today is : " + new StringBuilder().append(current_day).append("").append(" - ").append(current_month).append(" - ")
                 .append(current_year));
+        text_today.setTextColor(Color.BLUE);
 
         ArrayAdapter<CharSequence> adapter_day = ArrayAdapter.createFromResource(this, R.array.date, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> adapter_month = ArrayAdapter.createFromResource(this, R.array.month, android.R.layout.simple_spinner_item);
@@ -132,20 +134,24 @@ public class MainActivity extends ActionBarActivity  {
         btn_submit.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Log.e("exp", "My button--------------------------------------------------------------------------------------");
+            //Log.e("exp", "Clicked Calculate ");
 
-                //1. Get current Year, month, day here
-                if(isValidInput() == false){
-                    Log.e("Popup", "I m popup");
-                    startPopUpWindow();
-                    return;
-                }
 
-                calculateAge();
+            text_result.setText("You are: ");
+            text_next.setText("Your next birthday will be on: ");
+
+
+
+            //1. Get current Year, month, day here
+            if(isValidInput() == false){
+                Log.e("Popup", "I m popup");
+                startPopUpWindow();
+                return;
+            }
+
+            calculateAge();
             }
         });
-
-
     }
 
     public void startPopUpWindow(){
@@ -172,27 +178,33 @@ public class MainActivity extends ActionBarActivity  {
 
 
     public void calculateAge() {
+        /*
         Log.e("Day", Integer.toString(start_day));
         Log.e("Month", Integer.toString(start_month));
         Log.e("Year", Integer.toString(start_year));
-
+        */
 
         res_year  = current_year - start_year;
+        res_month = 0;
+        res_day = 0;
 
         if(current_month >= start_month) {
             res_month = current_month - start_month;
         }
         else{
-
-        res_month = current_month - start_month;
-        res_month = res_month + 12;
-        res_year = res_year - 1;
+            res_month = current_month - start_month;
+            res_month = res_month + 12;
+            res_year = res_year - 1;
         }
+
         if(current_day < start_day) {
             res_month = res_month - 1;
+
+            if(res_month < 0) {
+                res_year = res_year - 1;
+                res_month = res_month + 12;
+            }
         }
-
-
 
         if(current_day >= start_day) {
             res_day = current_day - start_day;
@@ -207,10 +219,10 @@ public class MainActivity extends ActionBarActivity  {
              res_day = current_day + prev_days - start_day;
 
         }
-        Log.e("hi", "88888888888888888888888888888888888888888888888888888888888888888888888");
-       // text_result.append("Years: " + Integer.toString(res_year) + " Months: " + Integer.toString(res_month) + " Days: " + Integer.toString(res_day));
-        text_result.append( Integer.toString(res_year) +" years "+Integer.toString(res_month)+" months " +Integer.toString(res_day)+" days old .."  );
+
+        text_result.append( Integer.toString(res_year) +" years "+Integer.toString(res_month)+" months " +Integer.toString(res_day)+" days old "  );
         text_next.append(Integer.toString(start_day )+ "/" + Integer.toString(start_month ) + "/" + Integer.toString(current_year + 1 ));
+        text_result.setTextColor(Color.BLUE);
     }
 
 
