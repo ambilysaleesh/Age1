@@ -20,8 +20,6 @@ import java.util.Calendar;
 
 
 
-
-
 /**
  *  main for Age Calculator
  **/
