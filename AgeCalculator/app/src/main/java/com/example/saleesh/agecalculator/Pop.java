@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 /**
  * Created by ambily saleesh on 22/09/15.
  */
@@ -29,7 +30,7 @@ public class Pop extends Activity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("Popup", "I m OK btn");
+                //Log.e("Popup", "I m OK btn");
                 finish();
             }
 

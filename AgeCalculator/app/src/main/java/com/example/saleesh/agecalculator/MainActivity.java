@@ -26,7 +26,7 @@ import java.util.Calendar;
  *  main for Age Calculator
 **/
 
-public class MainActivity extends ActionBarActivity  {
+public class MainActivity extends ActionBarActivity  { 
 
     Spinner spinday ;
     Spinner spinmonth;
@@ -142,7 +142,7 @@ public class MainActivity extends ActionBarActivity  {
 
             //1. Get current Year, month, day here
             if(isValidInput() == false){
-                Log.e("Popup", "I m popup");
+                //Log.e("Popup", "I m popup");
                 startPopUpWindow();
                 return;
             }
