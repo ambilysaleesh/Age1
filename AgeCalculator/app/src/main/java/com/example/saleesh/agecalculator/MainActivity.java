@@ -22,6 +22,9 @@ import android.view.View.OnClickListener;
 
 import java.util.Calendar;
 
+/**
+ *  main for Age Calculator
+**/
 
 public class MainActivity extends ActionBarActivity  {
 
@@ -53,7 +56,6 @@ public class MainActivity extends ActionBarActivity  {
     int month;
 
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -70,7 +72,7 @@ public class MainActivity extends ActionBarActivity  {
 
         text_today = (TextView)findViewById(R.id.textCurrent_day);
         text_today.setText("Today is : " + new StringBuilder().append(current_day).append("").append(" - ").append(current_month).append(" - ")
-                .append(current_year));
+                  .append(current_year));
         text_today.setTextColor(Color.BLUE);
 
         ArrayAdapter<CharSequence> adapter_day = ArrayAdapter.createFromResource(this, R.array.date, android.R.layout.simple_spinner_item);
@@ -130,17 +132,13 @@ public class MainActivity extends ActionBarActivity  {
         });
 
 
-
         btn_submit.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
             //Log.e("exp", "Clicked Calculate ");
 
-
             text_result.setText("You are: ");
             text_next.setText("Your next birthday will be on: ");
-
-
 
             //1. Get current Year, month, day here
             if(isValidInput() == false){
@@ -174,9 +172,10 @@ public class MainActivity extends ActionBarActivity  {
         }
 
         return isValid;
-    }
+    } /* endfn isValidInput */
 
 
+    /* Main logic of calculating the age in this function */
     public void calculateAge() {
         /*
         Log.e("Day", Integer.toString(start_day));
@@ -223,11 +222,11 @@ public class MainActivity extends ActionBarActivity  {
         text_result.append( Integer.toString(res_year) +" years "+Integer.toString(res_month)+" months " +Integer.toString(res_day)+" days old "  );
         text_next.append(Integer.toString(start_day )+ "/" + Integer.toString(start_month ) + "/" + Integer.toString(current_year + 1 ));
         text_result.setTextColor(Color.BLUE);
-    }
+    } /* endfn calculateAge */
 
 
 
-
+    /* get number of days: TODO: needs to consider leap year in the future */
     public int get_days(int month){
         int days = 30;
 
@@ -238,9 +237,7 @@ public class MainActivity extends ActionBarActivity  {
         else
         days = 30;
         return (days);
-
-    }
-
+    } /* endfn get_days() */
 
 
 
@@ -266,6 +263,4 @@ public class MainActivity extends ActionBarActivity  {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-}
+} /* end class MainActivity */
