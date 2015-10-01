@@ -73,6 +73,11 @@ public class MainActivity extends ActionBarActivity  {
                 }
 
                 findMyAge();
+                textView_result.setText(Integer.toString(res_year) + " years " + Integer.toString(res_month) + " months " + Integer.toString(res_day) + " days old ");
+
+
+                textView_next.setText(Integer.toString(start_day) + "/" + Integer.toString(start_month) + "/" + Integer.toString(current_year + 1));
+
 
             }
         });
@@ -123,6 +128,40 @@ public class MainActivity extends ActionBarActivity  {
     } /* endfn isValidInput */
 
 
+    public boolean isLeapYear(int year){
+        boolean is_leap = false;
+
+        if(year%4 == 0){
+            if(year%100==0){
+                if(year%400==0){
+                    is_leap = true;
+                }
+            }
+            else{
+                is_leap = true;
+            }
+        }
+        else{
+            is_leap = false;
+        }
+
+        return is_leap;
+    }
+
+    public void testLeapYear(){
+
+        int test_array[] = {2000, 2001, 2002, 2004, 2008, 2009, 2096, 2100, 2200, 2300, 2396, 2400, 2401};
+        int i;
+
+        for(i=0; i<13; i++){
+            boolean res = isLeapYear(test_array[i]);
+            Log.e(Integer.toString(test_array[i]), Boolean.toString(res));
+        }
+    }
+
+
+
+
     /* Main logic of calculating the age in this function */
     public void findMyAge() {
         /*
@@ -162,29 +201,29 @@ public class MainActivity extends ActionBarActivity  {
             if(prev_month == 0){
                 prev_month = 12;
             }
-            prev_days = get_days(prev_month);
+            prev_days = get_days_in_month(prev_month, current_year);
             res_day = current_day + prev_days - start_day;
-
         }
 
-        textView_result.setText(Integer.toString(res_year) + " years " + Integer.toString(res_month) + " months " + Integer.toString(res_day) + " days old ");
-        textView_next.setText(Integer.toString(start_day) + "/" + Integer.toString(start_month) + "/" + Integer.toString(current_year + 1));
-        //textView_result.setTextColor(Color.BLUE);
     } /* endfn calculateAge */
 
 
 
-    public int get_days(int month){
+    public int get_days_in_month(int month, int year){
         int days = 30;
 
-        if(month == 2)
+        if(month == 2) {
             days = 28;
-        else if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12)
+            if(isLeapYear(year)) days = 29;
+        }
+        else if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
             days = 31;
-        else
+        }
+        else {
             days = 30;
+        }
         return (days);
-    } /* endfn get_days() */
+    } /* endfn get_days_in_month() */
 
 
 
