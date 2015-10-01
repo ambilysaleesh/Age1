@@ -18,7 +18,7 @@
         android:id="@+id/textView_age"
         android:textStyle="bold"
         android:gravity="center_horizontal"
-        android:textColor="#ffff341e"
+        android:textColor="#ffffec14"
         android:textSize="@dimen/abc_text_size_large_material"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -94,12 +94,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calculate"
-        android:layout_marginTop="20dp"
         android:id="@+id/button_calculate"
         android:textStyle="bold"
-        android:layout_below="@+id/textView_dob_id"
-        android:layout_toRightOf="@+id/textView_today"
-        android:layout_toEndOf="@+id/textView_today"/>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -103,6 +103,11 @@ public class MainActivity extends ActionBarActivity  {
     public  boolean isValidInput(){
         boolean isValid = true;
 
+        if(start_year ==0){
+            isValid = false;
+
+        }
+
         if(start_year > current_year) {
             isValid = false;
         }

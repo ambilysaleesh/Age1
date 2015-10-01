@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:background="@color/button_material_light"
+                android:background="@drawable/popstyle"
                 android:layout_height="match_parent">
 
 
@@ -12,7 +12,9 @@
         android:text="Invalid date of birth"
         android:id="@+id/text_message"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/abc_text_size_small_material"
+        android:textStyle="bold"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"

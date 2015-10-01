@@ -30,7 +30,7 @@ public class Pop extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8), (int)(height*.1));
+        getWindow().setLayout((int)(width*.6), (int)(height*.12));
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
